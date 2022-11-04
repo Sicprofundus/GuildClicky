@@ -71,7 +71,7 @@ local function printf(s,...)
 end
 
 local function validateportal(item)
-   return ground.Search(item)() ~= nil
+    return ground.Search(item)() ~= nil
 end
 
 local function validatepath(item)
@@ -82,23 +82,29 @@ local function validatemenu(clicky)
     return mq.TLO.Menu.Name() == clicky.item
 end
 
+local function validateitemdistance(clicky)
+    local distance = mq.TLO.Ground.Search(clicky).Distance()
+    return (distance and distance <= 21) or false
+end
+
 local function interactmenu(clicky)
-    while not validatemenu(clicky) do
+    if validateitemdistance(clicky) then
         mq.cmd("/click right item")
-        mq.delay(200)
+        mq.delay(5000, function() return validatemenu(clicky) end)
+        mq.cmdf("/notify \"%s\" menuselect", clicky.text)
+    else
+        printf('%s We stopped too far away from %s', guildclickymsg, clicky.item)
+        mq.cmdf('/popcustom 18 20 [GuildClicky]\nWe stopped too far away from %s', clicky.item)
     end
-    mq.cmdf("/notify \"%s\" menuselect", clicky.text)
 end
 
 local function callnav()
-    mq.cmdf("/nav item")
-
-     -- chillax while we're navigating
-    while mq.TLO.Navigation.Active() do 
-        mq.delay(50)
+    mq.cmd("/nav item")
+    -- chillax while we're navigating
+    while mq.TLO.Navigation.Active() do
+        mq.delay(100)
     end
-
-    mq.delay(50)
+    mq.delay(100)
 end
 
 local function do_guildportal(clicky)
@@ -116,10 +122,10 @@ local function do_guildportal(clicky)
 
     -- I sure wish we could do a /itemtarget clear
     mq.cmd("/squelch /target clear")
-    mq.delay(150)
+    mq.delay(100)
     mq.cmdf("/itemtarget ${Ground.Search[%s]}", clicky.item)
-    mq.delay(50)
-    
+    mq.delay(100)
+
     if mq.TLO.ItemTarget() == clicky.item then
         callnav()
         interactmenu(clicky)
@@ -137,9 +143,9 @@ local function help()
 end
 
 local function bind_guildclicky(cmd)
-    if cmd == nil or cmd == 'help' then 
-       help()
-       return
+    if cmd == nil or cmd == 'help' then
+        help()
+        return
     end
 
     if guildclickies[cmd] then
