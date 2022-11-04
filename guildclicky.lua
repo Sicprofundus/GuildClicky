@@ -14,6 +14,7 @@ local guildclickymsg = '\ao[\agGuildClicky\ao]\ag::\aw'
 local guildclickyhelp = 'Please \ay\"/guildclicky \ag(or /gc)\ay help\"\aw for a list of available clickable guild portals.'
 
 -- this is not an exhaustive list and will get expanded
+-- please post in the discussion thread for additions
 local guildclickies = {
     umbral =  { item = 'Umbral Plains Scrying Bowl', text = 'Teleport to Umbral Plains'},
     cobalt = { item = 'Skyshrine Dragon Brazier', text = 'Teleport to Cobalt Scar'},
@@ -88,6 +89,7 @@ local function validateitemdistance(clicky)
 end
 
 local function interactmenu(clicky)
+    -- if the item is within distance, do the thing
     if validateitemdistance(clicky) then
         mq.cmd("/click right item")
         mq.delay(5000, function() return validatemenu(clicky) end)
