@@ -84,7 +84,7 @@ local function validatemenu(clicky)
 end
 
 local function validateitemdistance(clicky)
-    local distance = mq.TLO.Ground.Search(clicky).Distance()
+    local distance = mq.TLO.Ground.Search(clicky.item).Distance()
     return (distance and distance <= 21) or false
 end
 
