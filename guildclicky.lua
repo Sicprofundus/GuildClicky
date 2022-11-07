@@ -16,6 +16,7 @@ local guildclickyhelp = 'Please \ay\"/guildclicky \ag(or /gc)\ay help\"\aw for a
 -- this is not an exhaustive list and will get expanded
 -- please post in the discussion thread for additions
 local guildclickies = {
+    -- name = { item = '', text = ''},
     umbral =  { item = 'Umbral Plains Scrying Bowl', text = 'Teleport to Umbral Plains'},
     cobalt = { item = 'Skyshrine Dragon Brazier', text = 'Teleport to Cobalt Scar'},
     froststone = { item = 'Froststone Crystal Echo', text = 'Teleport to Froststone'},
@@ -65,6 +66,12 @@ local guildclickies = {
     dulak = { item = 'Painting: Dulak\'s Harbor', text = 'Teleport to Dulak\'s Harbor'},
     war = { item = 'Plane of War Spire', text = 'Teleport to The Plane of War'},
     drunder = { item = 'Painting: Drunder, the Fortress of Zek', text = 'Teleport to Drunder, Fortress of Zek'},
+    hole = { item = 'Tattered Cazicite Banner', text = 'Teleport to The Ruins of Old Paineel'},
+    stonebrunt = { item = 'Painting: Stonebrunt Mountains', text = 'Teleport to Stonebrunt Mountains'},
+    toxx = { item = 'Painting: Toxxulia Forest', text = 'Teleport to Toxxulia Forest'},
+    paineel = { item = 'Bookshelf of Paineel', text = 'Teleport to Paineel'},
+    erudin = { item = 'Erudin Brazier', text = 'Teleport to Erudin'},
+    warrens = { item = 'King Gragnar\'s Throne', text = 'Teleport to The Warrens'},
 }
 
 local function printf(s,...)
