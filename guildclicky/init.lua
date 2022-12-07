@@ -101,7 +101,7 @@ local function interactmenu(clicky)
     if validateitemdistance(clicky) then
         mq.cmd("/click right item")
         mq.delay(5000, function() return validatemenu(clicky) end)
-        mq.cmdf("/notify \"%s\" menuselect", clicky.text)
+        mq.cmdf("/squelch /notify \"%s\" menuselect", clicky.text)
     else
         printf('%s We stopped too far away from %s', guildclickymsg, clicky.item)
         mq.cmdf('/popcustom 18 20 [GuildClicky]\nWe stopped too far away from %s', clicky.item)
