@@ -133,7 +133,7 @@ local function do_guildportal(clicky)
     -- I sure wish we could do a /itemtarget clear
     mq.cmd("/squelch /target clear")
     mq.delay(100)
-    mq.cmdf("/itemtarget ${Ground.Search[%s]}", clicky.item)
+    mq.cmdf('/itemtarget "${Ground.Search[%s]}"', clicky.item)
     mq.delay(100)
 
     if mq.TLO.ItemTarget() == clicky.item then
