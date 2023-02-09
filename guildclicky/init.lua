@@ -22,6 +22,7 @@ local guildclickies = {
     froststone = { item = 'Froststone Crystal Echo', text = 'Teleport to Froststone'},
     lobby = { item = 'Shabby Lobby Door', text = 'Open the Door to the Lobby'},
     neriak = { item = 'Painting: The Blind Fish', text = 'Teleport to Neriak - Commons'},
+    neriakc = { item = 'Painting: Toadstool Tavern', text = 'Teleport to Neriak - Commons'},
     neriak3rd = { item = 'Painting: Maiden\'s Fancy', text = 'Teleport to Neriak - Third Gate'},
     neriakfq = { item = 'Painting: Slugs Tavern', text = 'Teleport to Neriak - Foreign Quarter'},
     health = { item = 'Cynosure of Health', text = 'Teleport to the Plane of Health'},
@@ -30,6 +31,7 @@ local guildclickies = {
     halas3 = { item = 'Mounted Bear Head', text = 'Teleport to Halas'},
     halas4 = { item = 'Mounted Tiger Head', text = 'Teleport to Halas'},
     surefall = { item = 'Brazier: The Everburning Ruby', text = 'Teleport to Surefall Glade'},
+    surefall2 = { item = 'Painting: The Founder', text = 'Teleport to Surefall Glade'},
     swamp = { item = 'Statue: Iksar Head', text = 'Teleport to Swamp of No Hope'},
     oldseb = { item = 'Froglok Head in a Jar', text = 'Teleport to Old Sebilis'},
     eastcab = { item = 'Placard: Tink N Babble', text = 'Teleport to East Cabilis'},
@@ -62,6 +64,7 @@ local guildclickies = {
     runnyeye = { item = 'Runnyeye Adventurer\'s Head', text = 'Teleport to Liberated Citadel of Runnyeye'},
     kaladim = { item = 'Underfoot Monument', text = 'Teleport to North Kaladim'},
     fury = { item = 'Oceanographer\'s Globe', text = 'Teleport to Hate\'s Fury'},
+    nqeynos = { item = 'Coat of Arms: Qeynos', text = 'Teleport to North Qeynos'},
     sqeynos = { item = 'Painting: Lion\'s Mane Tavern', text = 'Teleport to South Qeynos'},
     dulak = { item = 'Painting: Dulak\'s Harbor', text = 'Teleport to Dulak\'s Harbor'},
     war = { item = 'Plane of War Spire', text = 'Teleport to The Plane of War'},
@@ -73,6 +76,13 @@ local guildclickies = {
     erudin = { item = 'Erudin Brazier', text = 'Teleport to Erudin'},
     warrens = { item = 'King Gragnar\'s Throne', text = 'Teleport to The Warrens'},
     shadowhaven = { item = 'Shadow Haven Teleport Pad', text = 'Teleport to Shadow Haven'},
+    butcherblock = { item = 'Statue of Brell', text = 'Teleport ot Butcherblock Mountains'},
+    oggok = { item = 'Oggok Boulder Lounger', text = 'Teleport to Oggok'},
+    growth = { item = 'Painting: Tunare\'s Tree', text = 'Teleport to Plane of Growth'},
+    crystalcaverns = { item = 'Painting: Froststone Gate', text = 'Teleport to Crystal Caverns'},
+    permafrost = { item = 'Frozen Barbarian Adventurer', text = 'Teleport to Permafrost'},
+
+
 }
 
 local function printf(s,...)
