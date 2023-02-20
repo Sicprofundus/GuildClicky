@@ -81,7 +81,7 @@ local guildclickies = {
     growth = { item = 'Painting: Tunare\'s Tree', text = 'Teleport to Plane of Growth'},
     crystalcaverns = { item = 'Painting: Froststone Gate', text = 'Teleport to Crystal Caverns'},
     permafrost = { item = 'Frozen Barbarian Adventurer', text = 'Teleport to Permafrost'},
-
+    innovation = { item = 'Innovative Heli-Lamp', text = 'Teleport of Plane of Innovation'},
 
 }
 
