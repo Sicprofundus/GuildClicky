@@ -82,6 +82,7 @@ local guildclickies = {
     crystalcaverns = { item = 'Painting: Froststone Gate', text = 'Teleport to Crystal Caverns'},
     permafrost = { item = 'Frozen Barbarian Adventurer', text = 'Teleport to Permafrost'},
     innovation = { item = 'Innovative Heli-Lamp', text = 'Teleport of Plane of Innovation'},
+    tosk = { item = 'Statue of Toskirakk', text = 'Teleport to Toskirakk'},
 
 }
 
