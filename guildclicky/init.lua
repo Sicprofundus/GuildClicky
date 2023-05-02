@@ -5,103 +5,210 @@
 
         I don't know much about lua so yikes might be ahead!
 --]]
-
+--@type MQ
 local mq = require("mq")
+-- Load ImGui library
+require 'ImGui'
 
 local ground = mq.TLO.Ground
 
 local guildclickymsg = '\ao[\agGuildClicky\ao]\ag::\aw'
 local guildclickyhelp = 'Please \ay\"/guildclicky \ag(or /gc)\ay help\"\aw for a list of available clickable guild portals.'
 
+-- GUI Control variables
+-- TODO: create option to allow always displayed in guild hall
+local bDisplayUI = false
+
+local guildhallzonesbyID = {
+    [345] = true, -- "Guild Hall"
+    [737] = true, -- "Palatial Guild Hall"
+    [738] = true, -- "Grand Guild Hall"
+    [751] = true, -- "Modest Guild Hall"
+}
+
 -- this is not an exhaustive list and will get expanded
 -- please post in the discussion thread for additions
 local guildclickies = {
     -- name = { item = '', text = ''},
-    umbral =  { item = 'Umbral Plains Scrying Bowl', text = 'Teleport to Umbral Plains'},
+    -- [A]
+    abysmal = { item = 'The Grozmok Stone', text = 'Teleport to Abysmal Sea'},
+    akanon = { item = 'Shelf of Gnomish Spirits', text = 'Teleport to Ak\'Anon'},
+    akanon2 = { item = 'Ak\'Anon Bubble Lamp', text = 'Teleport to Ak\'Anon'},
+    -- [B]
+    blackburrow = { item = 'Banner: Blackburrow', text = 'Teleport to Blackburrow'},
+    butcherblock = { item = 'Statue of Brell', text = 'Teleport to Butcherblock Mountains'},
+    -- [C]
+    cabeast = { item = 'Placard: Tink N Babble', text = 'Teleport to East Cabilis'},
+    cabwest = { item = 'Brain in a Jar', text = 'Teleport to West Cabilis'},
     cobalt = { item = 'Skyshrine Dragon Brazier', text = 'Teleport to Cobalt Scar'},
+    crystalcaverns = { item = 'Painting: Froststone Gate', text = 'Teleport to Crystal Caverns'},
+    -- [D]
+    dulak = { item = 'Painting: Dulak\'s Harbor', text = 'Teleport to Dulak\'s Harbor'},
+    -- [E]
+    erudin = { item = 'Erudin Brazier', text = 'Teleport to Erudin'},
+    everfrost = { item = 'Claw Sconce Torch', text = 'Teleport to Everfrost'},
+    -- [F]
+    feerrottb = { item = 'Ogrish Spit', text = 'Teleport: Feerrott, the Dream'},
+    freeportn = { item = 'Painting: Tassel\'s Tavern', text = 'Teleport to North Freeport'},
+    frontier = { item = 'Ancient Iksar Translocator Statue', text = 'Teleport to Frontier Mountains'},
     froststone = { item = 'Froststone Crystal Echo', text = 'Teleport to Froststone'},
-    lobby = { item = 'Shabby Lobby Door', text = 'Open the Door to the Lobby'},
-    neriak = { item = 'Painting: The Blind Fish', text = 'Teleport to Neriak - Commons'},
-    neriakc = { item = 'Painting: Toadstool Tavern', text = 'Teleport to Neriak - Commons'},
-    neriak3rd = { item = 'Painting: Maiden\'s Fancy', text = 'Teleport to Neriak - Third Gate'},
-    neriakfq = { item = 'Painting: Slugs Tavern', text = 'Teleport to Neriak - Foreign Quarter'},
+    fury = { item = 'Oceanographer\'s Globe', text = 'Teleport to Hate\'s Fury'},
+    -- [G]
+    gfaydark = { item = 'Torch of Kelethin', text = 'Teleport to Greater Faydark'},
+    goro = { item = 'Gorowyn Translocator Lantern', text = 'Teleport to Skyfire Mountains'},
+    grobb = { item = 'Sign: Gunthak\'s Beltch', text = 'Teleport to Grobb'},
+    grobb2 = { item = 'All-Seeing Skull', text = 'Teleport to Grobb'},
+    grobb3 = { item = 'Darkone\'s Throne', text = 'Teleport to Grobb'},
+    grobb4 = { item = 'Troll\'s Butchery', text = 'Teleport to Grobb'},
+    growth = { item = 'Painting: Tunare\'s Tree', text = 'Teleport to Plane of Growth'},
+    -- [H]
     health = { item = 'Cynosure of Health', text = 'Teleport to the Plane of Health'},
     halas = { item = 'Placard: Halas', text = 'Teleport to Halas'},
     halas2 = { item = 'Mounted Snake Head', text = 'Teleport to Halas'},
     halas3 = { item = 'Mounted Bear Head', text = 'Teleport to Halas'},
     halas4 = { item = 'Mounted Tiger Head', text = 'Teleport to Halas'},
-    surefall = { item = 'Brazier: The Everburning Ruby', text = 'Teleport to Surefall Glade'},
-    surefall2 = { item = 'Painting: The Founder', text = 'Teleport to Surefall Glade'},
-    swamp = { item = 'Statue: Iksar Head', text = 'Teleport to Swamp of No Hope'},
-    oldseb = { item = 'Froglok Head in a Jar', text = 'Teleport to Old Sebilis'},
-    eastcab = { item = 'Placard: Tink N Babble', text = 'Teleport to East Cabilis'},
-    westcab = { item = 'Brain in a Jar', text = 'Teleport to West Cabilis'},
-    trak = { item = 'Emperor Ganak Throne', text = 'Teleport to Trakanon\'s Teeth'},
-    trak2 = { item = 'Statue: Iksar Bust', text = 'Teleport to Trakanon\'s Teeth'},
-    everfrost = { item = 'Claw Sconce Torch', text = 'Teleport to Everfrost'},
-    goro = { item = 'Gorowyn Translocator Lantern', text = 'Teleport to Skyfire Mountains'},
-    stratos = { item = 'Stratos Fire Platform', text = 'Teleport to Stratos'},
-    nadox = { item = 'Nadox Chandelier', text = 'Teleport to Crypt of Nadox'},
-    abysmal = { item = 'The Grozmok Stone', text = 'Teleport to Abysmal Sea'},
-    mistmoore = { item = 'Castle of Mistmoore Throne', text = 'Teleport to Castle of Mistmoore'},
-    lfaydark = { item = 'Painting: Brownie Encampment', text = 'Teleport to Lesser Faydark'},
-    gfaydark = { item = 'Torch of Kelethin', text = 'Teleport to Greater Faydark'},
-    steamfont = { item = 'Steamfont Lava Lamp', text = 'Teleport to Steamfont Mountains'},
-    steamfont2 = { item = 'Fantastic Fuel Orb', text = 'Teleport to Steamfont Mountains'},
-    oot = { item = 'Islander Hammok', text = 'Teleport to Ocean of Tears'},
     highkeep = { item = 'Painting: High Keep Serpent', text = 'Teleport to High Keep'},
     highkeep2 = { item = 'Banner: The Knotted Serpent', text = 'Teleport to High Keep'},
-    xorbb = { item = 'Painting: Throne of Xorbb', text = 'Teleport to Valley of King Xorbb'},
-    misty = { item = 'Misty Thicket Halfling Bed', text = 'Teleport to Misty Thicket'},
+    hole = { item = 'Tattered Cazicite Banner', text = 'Teleport to The Ruins of Old Paineel'},
+    -- [I]
     iceclad = { item = 'Banner: Gnome Pirates', text = 'Teleport to Iceclad Ocean'},
-    akanon = { item = 'Shelf of Gnomish Spirits', text = 'Teleport to Ak\'Anon'},
-    akanon2 = { item = 'Ak\'Anon Bubble Lamp', text = 'Teleport to Ak\'Anon'},
-    frontier = { item = 'Ancient Iksar Translocator Statue', text = 'Teleport to Frontier Mountains'},
-    rivervale = { item = 'Rivervale Jumjum Cart', text = 'Teleport to Rivervale'},
-    grobb = { item = 'Sign: Gunthak\'s Beltch', text = 'Teleport to Grobb'},
-    grobb2 = { item = 'All-Seeing Skull', text = 'Teleport to Grobb'},
-    grobb3 = { item = 'Darkone\'s Throne', text = 'Teleport to Grobb'},
-    grobb4 = { item = 'Troll\'s Butchery', text = 'Teleport to Grobb'},
-    thurgadin = { item = 'Dwarven Ice Statue', text = 'Teleport to Thurgadin'},
-    sanctus = { item = 'Statue: Sanctus Seru', text = 'Teleport to Sanctus Seru'},
-    sanctus2 = { item = 'Banner: Sanctus Seru', text = 'Teleport to Sanctus Seru'},
-    runnyeye = { item = 'Runnyeye Adventurer\'s Head', text = 'Teleport to Liberated Citadel of Runnyeye'},
-    kaladim = { item = 'Underfoot Monument', text = 'Teleport to North Kaladim'},
-    fury = { item = 'Oceanographer\'s Globe', text = 'Teleport to Hate\'s Fury'},
+    icewell = { item = 'Dain\'s Throne Replica', text = 'Teleport to Icewell Keep'},
+    innovation = { item = 'Innovative Heli-Lamp', text = 'Teleport of Plane of Innovation'},
+    -- [J]
+    -- [K]
+    kithicor = { item = 'Painting: Kithicor Forest', text = 'Teleport to Kithicor Forrest'},
+    -- [L]
+    lobby = { item = 'Shabby Lobby Door', text = 'Open the Door to the Lobby'},
+    -- [M]
+    mistmoore = { item = 'Castle of Mistmoore Throne', text = 'Teleport to Castle of Mistmoore'},
+    misty = { item = 'Misty Thicket Halfling Bed', text = 'Teleport to Misty Thicket'},
+    -- [N]
+    nadox = { item = 'Nadox Chandelier', text = 'Teleport to Crypt of Nadox'},
+    neriak = { item = 'Painting: The Blind Fish', text = 'Teleport to Neriak - Commons'},
+    neriakc = { item = 'Painting: Toadstool Tavern', text = 'Teleport to Neriak - Commons'},
+    neriak3rd = { item = 'Painting: Maiden\'s Fancy', text = 'Teleport to Neriak - Third Gate'},
+    neriakfq = { item = 'Painting: Slugs Tavern', text = 'Teleport to Neriak - Foreign Quarter'},
     nqeynos = { item = 'Coat of Arms: Qeynos', text = 'Teleport to North Qeynos'},
     nqeynos2 = { item = 'Painting: Crow\'s Pub & Casino', text = 'Teleport to North Qeynos'},
     nqeynos3 = { item = 'Banner: Traveler\'s Tapestry', text = 'Teleport to North Qeynos'},
-    sqeynos = { item = 'Painting: Lion\'s Mane Tavern', text = 'Teleport to South Qeynos'},
-    dulak = { item = 'Painting: Dulak\'s Harbor', text = 'Teleport to Dulak\'s Harbor'},
-    war = { item = 'Plane of War Spire', text = 'Teleport to The Plane of War'},
-    drunder = { item = 'Painting: Drunder, the Fortress of Zek', text = 'Teleport to Drunder, Fortress of Zek'},
-    hole = { item = 'Tattered Cazicite Banner', text = 'Teleport to The Ruins of Old Paineel'},
-    stonebrunt = { item = 'Painting: Stonebrunt Mountains', text = 'Teleport to Stonebrunt Mountains'},
-    toxx = { item = 'Painting: Toxxulia Forest', text = 'Teleport to Toxxulia Forest'},
-    paineel = { item = 'Bookshelf of Paineel', text = 'Teleport to Paineel'},
-    erudin = { item = 'Erudin Brazier', text = 'Teleport to Erudin'},
-    warrens = { item = 'King Gragnar\'s Throne', text = 'Teleport to The Warrens'},
-    shadowhaven = { item = 'Shadow Haven Teleport Pad', text = 'Teleport to Shadow Haven'},
-    butcherblock = { item = 'Statue of Brell', text = 'Teleport to Butcherblock Mountains'},
+    -- [O]
     oggok = { item = 'Oggok Boulder Lounger', text = 'Teleport to Oggok'},
-    growth = { item = 'Painting: Tunare\'s Tree', text = 'Teleport to Plane of Growth'},
-    crystalcaverns = { item = 'Painting: Froststone Gate', text = 'Teleport to Crystal Caverns'},
+    oot = { item = 'Islander Hammock', text = 'Teleport to Ocean of Tears'},
+    -- [P]
+    paineel = { item = 'Bookshelf of Paineel', text = 'Teleport to Paineel'},
     permafrost = { item = 'Frozen Barbarian Adventurer', text = 'Teleport to Permafrost'},
     permafrost2 = { item = 'Frozen Barbarian Adventuress', text = 'Teleport to Permafrost'},
-    innovation = { item = 'Innovative Heli-Lamp', text = 'Teleport of Plane of Innovation'},
+    -- [Q]
+    -- [R]
+    rivervale = { item = 'Rivervale Jumjum Cart', text = 'Teleport to Rivervale'},
+    runnyeye = { item = 'Runnyeye Adventurer\'s Head', text = 'Teleport to Liberated Citadel of Runnyeye'},
+    -- [S]
+    sanctus = { item = 'Statue: Sanctus Seru', text = 'Teleport to Sanctus Seru'},
+    sanctus2 = { item = 'Banner: Sanctus Seru', text = 'Teleport to Sanctus Seru'},
+    seb = { item = 'Froglok Head in a Jar', text = 'Teleport to Old Sebilis'},
+    shadowhaven = { item = 'Shadow Haven Teleport Pad', text = 'Teleport to Shadow Haven'},
+    sqeynos = { item = 'Painting: Lion\'s Mane Tavern', text = 'Teleport to South Qeynos'},
+    stratos = { item = 'Stratos Fire Platform', text = 'Teleport to Stratos'},
+    steamfont = { item = 'Steamfont Lava Lamp', text = 'Teleport to Steamfont Mountains'},
+    steamfont2 = { item = 'Fantastic Fuel Orb', text = 'Teleport to Steamfont Mountains'},
+    stonebrunt = { item = 'Painting: Stonebrunt Mountains', text = 'Teleport to Stonebrunt Mountains'},
+    surefall = { item = 'Brazier: The Everburning Ruby', text = 'Teleport to Surefall Glade'},
+    surefall2 = { item = 'Painting: The Founder', text = 'Teleport to Surefall Glade'},
+    swamp = { item = 'Statue: Iksar Head', text = 'Teleport to Swamp of No Hope'},
+    -- [T]
+    thurgadin = { item = 'Dwarven Ice Statue', text = 'Teleport to Thurgadin'},
     tosk = { item = 'Statue of Toskirakk', text = 'Teleport to Toskirakk'},
-    freeportn = { item = 'Painting: Tassel\'s Tavern', text = 'Teleport to North Freeport'},
-    blackburrow = { item = 'Banner: Blackburrow', text = 'Teleport to Blackburrow'},
-    kithicor = { item = 'Painting: Kithicor Forest', text = 'Teleport to Kithicor Forrest'},
-    feerrottb = { item = 'Ogrish Split', text = 'TeleportL:'}
+    toxx = { item = 'Painting: Toxxulia Forest', text = 'Teleport to Toxxulia Forest'},  
+    trak = { item = 'Emperor Ganak Throne', text = 'Teleport to Trakanon\'s Teeth'},
+    trak2 = { item = 'Statue: Iksar Bust', text = 'Teleport to Trakanon\'s Teeth'},         
+    -- [U]
+    umbral =  { item = 'Umbral Plains Scrying Bowl', text = 'Teleport to Umbral Plains'},
+    -- [V]        
+    -- [W]
+    war = { item = 'Plane of War Spire', text = 'Teleport to The Plane of War'},
+    warrens = { item = 'King Gragnar\'s Throne', text = 'Teleport to The Warrens'},
+    -- [X]
+    xorbb = { item = 'Painting: Throne of Xorbb', text = 'Teleport to Valley of King Xorbb'},
+    -- [Y]
+    -- [Z]
+    -- [#] 
 }
 
-local function printf(s,...)
-    return print(string.format(s,...))
-end
+local buttonLabels = {}
+local search_text = ""
+local current_tab = 1
 
 local function validateportal(item)
     return ground.Search(item)() ~= nil
+end
+
+local function sortvalidatedportals()
+    for k,_ in pairs(guildclickies) do
+        if validateportal(_.item) then
+            table.insert(buttonLabels, k)
+        end
+    end
+    table.sort(buttonLabels)
+end
+
+local function drawGuildClickyUI()
+    -- TODO: match the functionality i put in for portalsetter
+    --imgui.InputText("Search", search_text)
+
+    if ImGui.BeginTabBar("Tabs") then
+        -- TODO change to dynamically Determine how/what to create here based on future options
+        for i = 1, 5 do
+            -- Determine tab label
+            local label = ""
+            local command = ""
+            if i == 1 then
+                label = "Self"
+            elseif i == 2 then
+                label = "Group"
+                command = "/dgga "
+            elseif i == 3 then
+                label = "Raid"
+                command = "/dgra "
+            elseif i == 4 then
+                label = "Zone"
+                command = "/dgza "
+            elseif i == 5 then
+                label = "All"
+                command = "/dgae "
+                -- maybe add options later to turn off individual tabs
+            -- elseif i == 6 then
+            --     label = "Options"
+             end
+        
+            if ImGui.BeginTabItem(label) then
+                for k,_ in ipairs(buttonLabels) do
+                    if ImGui.Button(buttonLabels[k], ImVec2(200, 20)) then
+
+                        mq.cmd(command, '/guildclicky ', buttonLabels[k])
+                    end
+                end
+                ImGui.EndTabItem()
+            end
+        end
+        ImGui.EndTabBar()
+    end
+end
+
+local function GuildClickyUI()
+    if bDisplayUI then
+        -- TODO: Option to make this round/regular
+        ImGui.PushStyleVar(ImGuiStyleVar.WindowRounding, 50)
+        ImGui.Begin('GuildClicky', bDisplayUI)
+        drawGuildClickyUI()
+        ImGui.PopStyleVar(1)
+        ImGui.End()
+    end
+end
+
+mq.imgui.init('GuildClickyUI', GuildClickyUI)
+
+local function printf(s,...)
+    return print(string.format(s,...))
 end
 
 local function validatepath(item)
@@ -179,6 +286,11 @@ local function bind_guildclicky(cmd)
         return
     end
 
+    if cmd == 'ui' or cmd == 'gui' or cmd == 'show' then
+        bDisplayUI = not bDisplayUI
+        return
+    end
+
     if guildclickies[cmd] then
         do_guildportal(guildclickies[cmd])
         return
@@ -191,16 +303,25 @@ local function bind_guildclicky(cmd)
 
 end
 
+local function insideguildhall()
+    return guildhallzonesbyID[mq.TLO.Zone.ID()] == true
+end
+
 local function setup()
     mq.bind('/guildclicky', bind_guildclicky)
     mq.bind('/gc', bind_guildclicky)
     printf('%s \aoby \agSic', guildclickymsg)
     printf('%s This .lua script allows you to use guildhall clickies to port you places.', guildclickymsg)
+    printf('%s You can \ay\"/gc ui\"\ax to show the clickable ui buttons', guildclickymsg)
     printf('%s %s', guildclickymsg, guildclickyhelp)
+    sortvalidatedportals()
 end
 
 local function main()
     while true do
+        if bDisplayUI and not insideguildhall() then
+            bDisplayUI = false
+        end
         mq.delay(100)
     end
 end
