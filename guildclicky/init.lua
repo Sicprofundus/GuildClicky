@@ -12,7 +12,7 @@ require 'ImGui'
 
 local ground = mq.TLO.Ground
 
-local guildclickymsg = '\ao[\agGuildClicky\ao]\ag::\aw'
+local guildclickymsg = '\ao[\agGuildClicky\ao]\ag::\aw '
 local guildclickyhelp = 'Please \ay\"/guildclicky \ag(or /gc)\ay help\"\aw for a list of available clickable guild portals.'
 
 -- GUI Control variables
@@ -210,8 +210,8 @@ end
 
 mq.imgui.init('GuildClickyUI', GuildClickyUI)
 
-local function printf(s,...)
-    return print(string.format(s,...))
+local function printMsg(...)
+    print(guildclickymsg .. string.format(...))
 end
 
 local function validatepath(item)
@@ -234,7 +234,7 @@ local function interactmenu(clicky)
         mq.delay(5000, function() return validatemenu(clicky) end)
         mq.cmdf("/squelch /notify \"%s\" menuselect", clicky.text)
     else
-        printf('%s We stopped too far away from %s', guildclickymsg, clicky.item)
+        printMsg('We stopped too far away from %s', clicky.item)
         mq.cmdf('/popcustom 18 20 [GuildClicky]\nWe stopped too far away from %s', clicky.item)
     end
 end
@@ -250,14 +250,14 @@ end
 
 local function do_guildportal(clicky)
     if not validateportal(clicky.item) then
-        printf('%s We could not find %s', guildclickymsg, clicky.item)
-        printf('%s %s', guildclickymsg, guildclickyhelp)
+        printMsg('We could not find %s', clicky.item)
+        printMsg('%s', guildclickyhelp)
         return
     end
 
     if not validatepath(clicky.item) then
-        printf('%s We could not find a path to %s', guildclickymsg, clicky.item)
-        printf('%s Please ensure that there is a valid mesh and valid path available', guildclickymsg)
+        printMsg('We could not find a path to %s', clicky.item)
+        printMsg('Please ensure that there is a valid mesh and valid path available')
         return
     end
 
@@ -274,11 +274,11 @@ local function do_guildportal(clicky)
 end
 
 local function help()
-    printf('%s \agGuildClicky available options include:', guildclickymsg)
+    printMsg('\agGuildClicky available options include:')
 
     for k,_ in pairs(guildclickies) do
         if validateportal(_.item) then
-            printf('%s \ao\"/gc %s\" \arto use \ag%s \arto \ao%s', guildclickymsg, k, _.item, _.text)
+            printMsg('\ao\"/gc %s\" \arto use \ag%s \arto \ao%s', k, _.item, _.text)
         end
     end
 end
@@ -301,8 +301,8 @@ local function bind_guildclicky(cmd)
 
     -- if we didn't return after finding something, or doing help
     -- then that means it was invalid.
-    printf('%s \ag%s\ax was \arinvalid.', guildclickymsg, cmd)
-    printf('%s %s', guildclickymsg, guildclickyhelp)
+    printMsg('\ag%s\ax was \arinvalid.', cmd)
+    printMsg('%s', guildclickyhelp)
 
 end
 
@@ -313,10 +313,10 @@ end
 local function setup()
     mq.bind('/guildclicky', bind_guildclicky)
     mq.bind('/gc', bind_guildclicky)
-    printf('%s \aoby \agSic', guildclickymsg)
-    printf('%s This .lua script allows you to use guildhall clickies to port you places.', guildclickymsg)
-    printf('%s You can \ay\"/gc ui\"\ax to show the clickable ui buttons', guildclickymsg)
-    printf('%s %s', guildclickymsg, guildclickyhelp)
+    printMsg('\aoby \agSic')
+    printMsg('This .lua script allows you to use guildhall clickies to port you places.')
+    printMsg('%s You can \ay\"/gc ui\"\ax to show the clickable ui buttons')
+    printMsg('%s', guildclickyhelp)
     sortvalidatedportals()
 end
 
