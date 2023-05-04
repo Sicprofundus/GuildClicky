@@ -40,6 +40,7 @@ local guildclickies = {
     -- [C]
     cabeast = { item = 'Placard: Tink N Babble', text = 'Teleport to East Cabilis'},
     cabwest = { item = 'Brain in a Jar', text = 'Teleport to West Cabilis'},
+    crushbone = { item = 'Banner of Clan Crushbone', text = 'Teleport to Clan Crushbone'},
     cobalt = { item = 'Skyshrine Dragon Brazier', text = 'Teleport to Cobalt Scar'},
     crystalcaverns = { item = 'Painting: Froststone Gate', text = 'Teleport to Crystal Caverns'},
     -- [D]
@@ -197,10 +198,12 @@ end
 local function GuildClickyUI()
     if bDisplayUI then
         -- TODO: Option to make this round/regular
-        ImGui.PushStyleVar(ImGuiStyleVar.WindowRounding, 50)
-        ImGui.Begin('GuildClicky', bDisplayUI)
+        ImGui.PushStyleVar(ImGuiStyleVar.WindowRounding, 10)
+        ImGui.PushStyleVar(ImGuiStyleVar.ScrollbarRounding, 50)
+        ImGui.PushStyleVar(ImGuiStyleVar.FrameRounding, 5)
+        bDisplayUI, _ = ImGui.Begin('GuildClicky', true)
         drawGuildClickyUI()
-        ImGui.PopStyleVar(1)
+        ImGui.PopStyleVar(3)
         ImGui.End()
     end
 end
