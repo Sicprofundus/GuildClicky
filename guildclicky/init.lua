@@ -251,7 +251,7 @@ end
 local function do_guildportal(clicky)
     if not validateportal(clicky.item) then
         printMsg('We could not find %s', clicky.item)
-        printMsg('%s', guildclickyhelp)
+        printMsg(guildclickyhelp)
         return
     end
 
@@ -302,7 +302,7 @@ local function bind_guildclicky(cmd)
     -- if we didn't return after finding something, or doing help
     -- then that means it was invalid.
     printMsg('\ag%s\ax was \arinvalid.', cmd)
-    printMsg('%s', guildclickyhelp)
+    printMsg(guildclickyhelp)
 
 end
 
@@ -315,8 +315,8 @@ local function setup()
     mq.bind('/gc', bind_guildclicky)
     printMsg('\aoby \agSic')
     printMsg('This .lua script allows you to use guildhall clickies to port you places.')
-    printMsg('%s You can \ay\"/gc ui\"\ax to show the clickable ui buttons')
-    printMsg('%s', guildclickyhelp)
+    printMsg('You can \ay\"/gc ui\"\ax to show the clickable ui buttons')
+    printMsg(guildclickyhelp)
     sortvalidatedportals()
 end
 
