@@ -44,6 +44,7 @@ local guildclickies = {
     cobalt = { item = 'Skyshrine Dragon Brazier', text = 'Teleport to Cobalt Scar'},
     crystalcaverns = { item = 'Painting: Froststone Gate', text = 'Teleport to Crystal Caverns'},
     -- [D]
+    drunder = { item = 'Painting: Drunder, the Fortress of Zek', text = 'Teleport to Drunder, Fortress of Zek'},
     dulak = { item = 'Painting: Dulak\'s Harbor', text = 'Teleport to Dulak\'s Harbor'},
     -- [E]
     erudin = { item = 'Erudin Brazier', text = 'Teleport to Erudin'},
@@ -77,8 +78,10 @@ local guildclickies = {
     innovation = { item = 'Innovative Heli-Lamp', text = 'Teleport of Plane of Innovation'},
     -- [J]
     -- [K]
+    kaladim = { item = "Underfoot Monument", text = "Teleport to North Kaladim" },
     kithicor = { item = 'Painting: Kithicor Forest', text = 'Teleport to Kithicor Forrest'},
     -- [L]
+    lfaydark = { item = 'Painting: Brownie Encampment', text = 'Teleport to Lesser Faydark'},
     lobby = { item = 'Shabby Lobby Door', text = 'Open the Door to the Lobby'},
     -- [M]
     mistmoore = { item = 'Castle of Mistmoore Throne', text = 'Teleport to Castle of Mistmoore'},
