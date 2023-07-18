@@ -15,6 +15,8 @@ local ground = mq.TLO.Ground
 local guildclickymsg = '\ao[\agGuildClicky\ao]\ag::\aw '
 local guildclickyhelp = 'Please \ay\"/guildclicky \ag(or /gc)\ay help\"\aw for a list of available clickable guild portals.'
 
+local bValidateComplete = false
+
 -- GUI Control variables
 -- TODO: create option to allow always displayed in guild hall
 local bDisplayUI = false
@@ -158,6 +160,7 @@ local function sortvalidatedportals()
         end
     end
     table.sort(buttonLabels)
+    bValidateComplete = true
 end
 
 local function drawGuildClickyUI()
@@ -318,8 +321,6 @@ local function insideguildhall()
     return guildhallzonesbyID[mq.TLO.Zone.ID()] == true
 end
 
-local bSetupComplete = false
-
 local function setup()
     mq.bind('/guildclicky', bind_guildclicky)
     mq.bind('/gc', bind_guildclicky)
@@ -327,13 +328,12 @@ local function setup()
     printMsg('This .lua script allows you to use guildhall clickies to port you places.')
     printMsg('You can \ay\"/gc ui\"\ax to show the clickable ui buttons')
     printMsg(guildclickyhelp)
-    sortvalidatedportals()
 end
 
 local function main()
     while true do
-        if insideguildhall() and not bSetupComplete then
-            setup()
+        if insideguildhall() and not bValidateComplete then
+            sortvalidatedportals()
         end
 
         if bDisplayUI and not insideguildhall() then
