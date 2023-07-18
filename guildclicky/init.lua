@@ -318,6 +318,8 @@ local function insideguildhall()
     return guildhallzonesbyID[mq.TLO.Zone.ID()] == true
 end
 
+local bSetupComplete = false
+
 local function setup()
     mq.bind('/guildclicky', bind_guildclicky)
     mq.bind('/gc', bind_guildclicky)
@@ -330,10 +332,14 @@ end
 
 local function main()
     while true do
+        if insideguildhall() and not bSetupComplete then
+            setup()
+        end
+
         if bDisplayUI and not insideguildhall() then
             bDisplayUI = false
         end
-        mq.delay(100)
+        mq.delay(500)
     end
 end
 
