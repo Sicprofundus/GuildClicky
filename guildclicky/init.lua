@@ -38,6 +38,7 @@ local guildclickies = {
     akanon2 = { item = 'Ak\'Anon Bubble Lamp', text = 'Teleport to Ak\'Anon' },
     -- [B]
     blackburrow = { item = 'Banner: Blackburrow', text = 'Teleport to Blackburrow' },
+    bloodykith = { item = 'Army of Light Barricade', text = 'Teleport to Bloody Kithikor' },
     butcherblock = { item = 'Statue of Brell', text = 'Teleport to Butcherblock Mountains' },
     -- [C]
     cabeast = { item = 'Placard: Tink N Babble', text = 'Teleport to East Cabilis' },
