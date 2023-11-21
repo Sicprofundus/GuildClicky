@@ -214,7 +214,6 @@ end
 
 local function GuildClickyUI()
     if bDisplayUI then
-        -- TODO: Option to make this round/regular
         ImGui.PushStyleVar(ImGuiStyleVar.WindowRounding, 10)
         ImGui.PushStyleVar(ImGuiStyleVar.ScrollbarRounding, 50)
         ImGui.PushStyleVar(ImGuiStyleVar.FrameRounding, 5)
