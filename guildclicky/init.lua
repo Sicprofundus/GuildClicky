@@ -63,6 +63,7 @@ local guildclickies = {
     -- [G]
     gfaydark = { item = 'Torch of Kelethin', text = 'Teleport to Greater Faydark' },
     goro = { item = 'Gorowyn Translocator Lantern', text = 'Teleport to Skyfire Mountains' },
+    grimling = { item = 'Painting: Grimling Forest Outpost', text = 'Teleport to Grimling Forest' },
     grobb = { item = 'Sign: Gunthak\'s Beltch', text = 'Teleport to Grobb' },
     grobb2 = { item = 'All-Seeing Skull', text = 'Teleport to Grobb' },
     grobb3 = { item = 'Darkone\'s Throne', text = 'Teleport to Grobb' },
@@ -77,6 +78,7 @@ local guildclickies = {
     highkeep = { item = 'Painting: High Keep Serpent', text = 'Teleport to High Keep' },
     highkeep2 = { item = 'Banner: The Knotted Serpent', text = 'Teleport to High Keep' },
     hole = { item = 'Tattered Cazicite Banner', text = 'Teleport to The Ruins of Old Paineel' },
+    hollowshade = { item = 'Hollowshade Moor Bonefire', text = 'Teleport to Hollowshade Moor' },
     -- [I]
     iceclad = { item = 'Banner: Gnome Pirates', text = 'Teleport to Iceclad Ocean' },
     icewell = { item = 'Dain\'s Throne Replica', text = 'Teleport to Icewell Keep' },
@@ -116,7 +118,9 @@ local guildclickies = {
     sanctus = { item = 'Statue: Sanctus Seru', text = 'Teleport to Sanctus Seru' },
     sanctus2 = { item = 'Banner: Sanctus Seru', text = 'Teleport to Sanctus Seru' },
     seb = { item = 'Froglok Head in a Jar', text = 'Teleport to Old Sebilis' },
+    sharvhal = { item = 'Sculpted Vah Shir Effigy', text = 'Teleport to Shar Vahl' },
     shadowhaven = { item = 'Shadow Haven Teleport Pad', text = 'Teleport to Shadow Haven' },
+    shadeweavers = { item = 'Banner of the Vah Shir Crest', text = 'Teleport to Shadeweaver\'s Ticket' },
     sqeynos = { item = 'Painting: Lion\'s Mane Tavern', text = 'Teleport to South Qeynos' },
     stratos = { item = 'Stratos Fire Platform', text = 'Teleport to Stratos' },
     steamfont = { item = 'Steamfont Lava Lamp', text = 'Teleport to Steamfont Mountains' },
@@ -125,6 +129,7 @@ local guildclickies = {
     surefall = { item = 'Brazier: The Everburning Ruby', text = 'Teleport to Surefall Glade' },
     surefall2 = { item = 'Painting: The Founder', text = 'Teleport to Surefall Glade' },
     swamp = { item = 'Statue: Iksar Head', text = 'Teleport to Swamp of No Hope' },
+    ssra = { item = 'Ssraeshza Temple Sarcophagus', text = 'Teleport to Ssraeshza Temple' },
     -- [T]
     takishruins = { item = 'Painting: Ruins of Takish-Hiz', text = 'Teleport to Ruins of Takish-Hiz' },
     thurgadin = { item = 'Dwarven Ice Statue', text = 'Teleport to Thurgadin' },
@@ -134,7 +139,8 @@ local guildclickies = {
     trak2 = { item = 'Statue: Iksar Bust', text = 'Teleport to Trakanon\'s Teeth' },         
     -- [U]
     umbral =  { item = 'Umbral Plains Scrying Bowl', text = 'Teleport to Umbral Plains' },
-    -- [V]        
+    -- [V]    
+    vexthal = { item = 'Statue of Aten Ha Ra', text = 'Teleport to Vex Thal' },    
     -- [W]
     war = { item = 'Plane of War Spire', text = 'Teleport to The Plane of War' },
     warrens = { item = 'King Gragnar\'s Throne', text = 'Teleport to The Warrens' },
