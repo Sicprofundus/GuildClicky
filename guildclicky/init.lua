@@ -89,6 +89,7 @@ local guildclickies = {
     kaladim = { item = "Underfoot Monument", text = "Teleport to North Kaladim" },
     kithicor = { item = 'Painting: Kithicor Forest', text = 'Teleport to Kithicor Forrest' },
     -- [L]
+    laurion = { item = 'Laurion\'s Door', text = 'Teleport to Laurion\'s Inn' },
     library = { item = 'Library Wall Sconce', text = 'Teleport to The Library' },
     lfaydark = { item = 'Painting: Brownie Encampment', text = 'Teleport to Lesser Faydark' },
     lobby = { item = 'Shabby Lobby Door', text = 'Open the Door to the Lobby' },
