@@ -122,7 +122,7 @@ local guildclickies = {
     seb = { item = 'Froglok Head in a Jar', text = 'Teleport to Old Sebilis' },
     sharvhal = { item = 'Sculpted Vah Shir Effigy', text = 'Teleport to Shar Vahl' },
     shadowhaven = { item = 'Shadow Haven Teleport Pad', text = 'Teleport to Shadow Haven' },
-    shadeweavers = { item = 'Banner of the Vah Shir Crest', text = 'Teleport to Shadeweaver\'s Ticket' },
+    shadeweavers = { item = 'Banner of the Vah Shir Crest', text = 'Teleport to Shadeweaver\'s Thicket' },
     sqeynos = { item = 'Painting: Lion\'s Mane Tavern', text = 'Teleport to South Qeynos' },
     stratos = { item = 'Stratos Fire Platform', text = 'Teleport to Stratos' },
     steamfont = { item = 'Steamfont Lava Lamp', text = 'Teleport to Steamfont Mountains' },
