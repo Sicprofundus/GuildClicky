@@ -54,7 +54,7 @@ local guildclickies = {
     erudin = { item = 'Erudin Brazier', text = 'Teleport to Erudin' },
     everfrost = { item = 'Claw Sconce Torch', text = 'Teleport to Everfrost' },
     -- [F]
-    feerrottb = { item = 'Ogrish Spit', text = 'Teleport: Feerrott, the Dream' },
+    feerrottb = { item = 'Ogrish Spit', text = 'Teleport to The Feerrott' },
     felwithesouth = { item = 'Felwithe Candelabra', text = 'Teleport to Southern Felwithe' },
     firiona = { item = 'Champion of Tunare Statue', text = 'Teleport to Firional Vie' },
     freeportn = { item = 'Painting: Tassel\'s Tavern', text = 'Teleport to North Freeport' },
