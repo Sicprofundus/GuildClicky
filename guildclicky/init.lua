@@ -5,8 +5,9 @@
 
         I don't know much about lua so yikes might be ahead!
 --]]
---@type MQ
-local mq = require("mq")
+---@type Mq
+local mq = require('mq')
+---@type ImGui
 -- Load ImGui library
 require 'ImGui'
 
@@ -39,6 +40,7 @@ local guildclickies = {
     -- [B]
     blackburrow = { item = 'Banner: Blackburrow', text = 'Teleport to Blackburrow' },
     bloodykith = { item = 'Army of Light Barricade', text = 'Teleport to Bloody Kithikor' },
+    brells = { item = 'Temple Torchiere', text = 'Teleport to Brell\'s Temple' },
     butcherblock = { item = 'Statue of Brell', text = 'Teleport to Butcherblock Mountains' },
     -- [C]
     cabeast = { item = 'Placard: Tink N Babble', text = 'Teleport to East Cabilis' },
@@ -70,6 +72,7 @@ local guildclickies = {
     grobb3 = { item = 'Darkone\'s Throne', text = 'Teleport to Grobb' },
     grobb4 = { item = 'Troll\'s Butchery', text = 'Teleport to Grobb' },
     growth = { item = 'Painting: Tunare\'s Tree', text = 'Teleport to Plane of Growth' },
+    gunthak = { item = 'Gunthak Altar', text = 'Teleport to the Gulf of Gunthak' },
     -- [H]
     health = { item = 'Cynosure of Health', text = 'Teleport to the Plane of Health' },
     halas = { item = 'Placard: Halas', text = 'Teleport to Halas' },
@@ -83,6 +86,7 @@ local guildclickies = {
     -- [I]
     iceclad = { item = 'Banner: Gnome Pirates', text = 'Teleport to Iceclad Ocean' },
     icewell = { item = 'Dain\'s Throne Replica', text = 'Teleport to Icewell Keep' },
+    innothule = { item = 'Guktan Brazier', text = 'Teleport to Innothule Swamp' },
     innovation = { item = 'Innovative Heli-Lamp', text = 'Teleport of Plane of Innovation' },
     -- [J]
     -- [K]
@@ -94,10 +98,12 @@ local guildclickies = {
     lfaydark = { item = 'Painting: Brownie Encampment', text = 'Teleport to Lesser Faydark' },
     lobby = { item = 'Shabby Lobby Door', text = 'Open the Door to the Lobby' },
     -- [M]
+    marr = { item = 'Statue of Mithaniel Marr', text = 'Teleport to The Temple of Marr' },
     mistmoore = { item = 'Castle of Mistmoore Throne', text = 'Teleport to Castle of Mistmoore' },
     misty = { item = 'Misty Thicket Halfling Bed', text = 'Teleport to Misty Thicket' },
     -- [N]
     nadox = { item = 'Nadox Chandelier', text = 'Teleport to Crypt of Nadox' },
+    nedaria = { item = 'Painting: Nedaria\'s Landing', text = 'Teleport to Nedaria\'s Landing' },
     neriak = { item = 'Painting: The Blind Fish', text = 'Teleport to Neriak - Commons' },
     neriakc = { item = 'Painting: Toadstool Tavern', text = 'Teleport to Neriak - Commons' },
     neriak3rd = { item = 'Painting: Maiden\'s Fancy', text = 'Teleport to Neriak - Third Gate' },
@@ -114,6 +120,7 @@ local guildclickies = {
     permafrost2 = { item = 'Frozen Barbarian Adventuress', text = 'Teleport to Permafrost' },
     -- [Q]
     -- [R]
+    rathe = { item = 'Rathe Mountain Cart', text = 'Teleport to The Rathe Mountains' },
     rivervale = { item = 'Rivervale Jumjum Cart', text = 'Teleport to Rivervale' },
     runnyeye = { item = 'Runnyeye Adventurer\'s Head', text = 'Teleport to Liberated Citadel of Runnyeye' },
     -- [S]
@@ -136,13 +143,14 @@ local guildclickies = {
     takishruins = { item = 'Painting: Ruins of Takish-Hiz', text = 'Teleport to Ruins of Takish-Hiz' },
     thurgadin = { item = 'Dwarven Ice Statue', text = 'Teleport to Thurgadin' },
     tosk = { item = 'Statue of Toskirakk', text = 'Teleport to Toskirakk' },
-    toxx = { item = 'Painting: Toxxulia Forest', text = 'Teleport to Toxxulia Forest' },  
+    toxx = { item = 'Painting: Toxxulia Forest', text = 'Teleport to Toxxulia Forest' },
     trak = { item = 'Emperor Ganak Throne', text = 'Teleport to Trakanon\'s Teeth' },
-    trak2 = { item = 'Statue: Iksar Bust', text = 'Teleport to Trakanon\'s Teeth' },         
+    trak2 = { item = 'Statue: Iksar Bust', text = 'Teleport to Trakanon\'s Teeth' },
     -- [U]
     umbral =  { item = 'Umbral Plains Scrying Bowl', text = 'Teleport to Umbral Plains' },
     -- [V]    
-    vexthal = { item = 'Statue of Aten Ha Ra', text = 'Teleport to Vex Thal' },    
+    veksar = { item = 'Veksar Chandelier', text = 'Teleport to Veksar' },
+    vexthal = { item = 'Statue of Aten Ha Ra', text = 'Teleport to Vex Thal' },
     -- [W]
     war = { item = 'Plane of War Spire', text = 'Teleport to The Plane of War' },
     warrens = { item = 'King Gragnar\'s Throne', text = 'Teleport to The Warrens' },
@@ -175,6 +183,11 @@ local function drawGuildClickyUI()
     -- TODO: match the functionality i put in for portalsetter
     --imgui.InputText("Search", search_text)
 
+    local searchBuffer = ""
+    local bufferSize = 64
+    local doSearch = false;
+    searchBuffer = ImGui.InputText("zone name", searchBuffer, bufferSize)
+
     if ImGui.BeginTabBar("Tabs") then
         -- TODO change to dynamically Determine how/what to create here based on future options
         for i = 1, 5 do
@@ -199,12 +212,17 @@ local function drawGuildClickyUI()
             -- elseif i == 6 then
             --     label = "Options"
              end
-        
+
             if ImGui.BeginTabItem(label) then
                 for k,_ in ipairs(buttonLabels) do
-                    if ImGui.Button(buttonLabels[k], ImVec2(200, 20)) then
-
-                        mq.cmd(command, '/guildclicky ', buttonLabels[k])
+                    if string.len(searchBuffer) > 0 then
+                        if string.find(buttonLabels[k]:lower(), searchBuffer:lower()) then
+                            if ImGui.Button(buttonLabels[k], ImVec2(200, 20)) then
+                                mq.cmd(command, '/guildclicky ', buttonLabels[k])
+                            end
+                        end
+                    elseif ImGui.Button(buttonLabels[k], ImVec2(200, 20)) then
+                         mq.cmd(command, '/guildclicky ', buttonLabels[k])
                     end
                 end
                 ImGui.EndTabItem()
