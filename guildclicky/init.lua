@@ -99,6 +99,7 @@ local guildclickies = {
     lobby = { item = 'Shabby Lobby Door', text = 'Open the Door to the Lobby' },
     -- [M]
     marr = { item = 'Statue of Mithaniel Marr', text = 'Teleport to The Temple of Marr' },
+    mischief = { item = 'Mischievous Wall Torch', text = 'Teleport to Plane of Mischief' },
     mistmoore = { item = 'Castle of Mistmoore Throne', text = 'Teleport to Castle of Mistmoore' },
     misty = { item = 'Misty Thicket Halfling Bed', text = 'Teleport to Misty Thicket' },
     -- [N]
