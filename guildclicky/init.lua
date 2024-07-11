@@ -29,6 +29,27 @@ local guildhallzonesbyID = {
     [751] = true, -- "Modest Guild Hall"
 }
 
+local colors = {
+    -- self = IM_COL32(38, 70, 83, 255),
+    -- group = IM_COL32(42, 157, 143, 255),
+    -- raid = IM_COL32(233, 196, 106, 255),
+    -- zone = IM_COL32(244, 168, 97, 255),
+    -- all = IM_COL32(42, 157, 143, 255)
+    self = IM_COL32(100, 143, 255, 255),
+    group = IM_COL32(120, 94, 240, 255),
+    raid = IM_COL32(220, 38, 127, 255),
+    zone = IM_COL32(254, 97, 0, 255),
+    all = IM_COL32(255, 176, 0, 255)
+}
+
+local ClickableUIButtons = {
+    [1] = { label = 'S', command = 'x', --[[junk]]  tooltip = 'Self',   color = colors.self },
+    [2] = { label = 'G', command = '/dgga ',        tooltip = 'Group',  color = colors.group },
+    [3] = { label = 'R', command = '/dgra ',        tooltip = 'Raid',   color = colors.raid },
+    [4] = { label = 'Z', command = '/dgza ',        tooltip = 'Zone',   color = colors.zone },
+    [5] = { label = 'A', command = '/dgae ',        tooltip = 'All',    color = colors.all }
+}
+
 -- this is not an exhaustive list and will get expanded
 -- please post in the discussion thread for additions
 local guildclickies = {
@@ -162,9 +183,8 @@ local guildclickies = {
     -- [#] 
 }
 
-local buttonLabels = {}
-local search_text = ""
-local current_tab = 1
+local zoneButtonLabels = {}
+local searchBuffer = ""
 
 local function validateportal(item)
     return ground.Search(item)() ~= nil
@@ -173,64 +193,78 @@ end
 local function sortvalidatedportals()
     for k,_ in pairs(guildclickies) do
         if validateportal(_.item) then
-            table.insert(buttonLabels, k)
+            table.insert(zoneButtonLabels, k)
         end
     end
-    table.sort(buttonLabels)
+    table.sort(zoneButtonLabels)
     bValidateComplete = true
 end
 
 local function drawGuildClickyUI()
-    -- TODO: match the functionality i put in for portalsetter
-    --imgui.InputText("Search", search_text)
-
-    local searchBuffer = ""
     local bufferSize = 64
-    local doSearch = false;
     searchBuffer = ImGui.InputText("zone name", searchBuffer, bufferSize)
 
-    if ImGui.BeginTabBar("Tabs") then
-        -- TODO change to dynamically Determine how/what to create here based on future options
-        for i = 1, 5 do
-            -- Determine tab label
-            local label = ""
-            local command = ""
-            if i == 1 then
-                label = "Self"
-            elseif i == 2 then
-                label = "Group"
-                command = "/dgga "
-            elseif i == 3 then
-                label = "Raid"
-                command = "/dgra "
-            elseif i == 4 then
-                label = "Zone"
-                command = "/dgza "
-            elseif i == 5 then
-                label = "All"
-                command = "/dgae "
-                -- maybe add options later to turn off individual tabs
-            -- elseif i == 6 then
-            --     label = "Options"
-             end
+    local flags = bit32.bor(ImGuiTableFlags.Borders, ImGuiTableFlags.RowBg)
+    ImGui.BeginTable("buttons", 2, flags)
+    ImGui.TableSetupColumn("Zone", ImGuiTableColumnFlags.None, 50)
+    ImGui.TableSetupColumn("Command", ImGuiTableColumnFlags.None, 50)
+    ImGui.TableHeadersRow()
+    for k,_ in ipairs(zoneButtonLabels) do
+        local text = zoneButtonLabels[k]
+        local bdisplaybutton = false
 
-            if ImGui.BeginTabItem(label) then
-                for k,_ in ipairs(buttonLabels) do
-                    if string.len(searchBuffer) > 0 then
-                        if string.find(buttonLabels[k]:lower(), searchBuffer:lower()) then
-                            if ImGui.Button(buttonLabels[k], ImVec2(200, 20)) then
-                                mq.cmd(command, '/guildclicky ', buttonLabels[k])
-                            end
-                        end
-                    elseif ImGui.Button(buttonLabels[k], ImVec2(200, 20)) then
-                         mq.cmd(command, '/guildclicky ', buttonLabels[k])
+        if string.len(searchBuffer) > 0 or string.len(searchBuffer) then
+            if string.find(zoneButtonLabels[k]:lower(), searchBuffer:lower()) then
+                bdisplaybutton = true
+            end
+        else
+            bdisplaybutton = true
+        end
+
+        if bdisplaybutton then
+            ImGui.PushID(k)
+            ImGui.TableNextRow()
+            ImGui.TableSetColumnIndex(0)
+            ImGui.Text(text)
+            if ImGui.IsItemHovered(ImGuiHoveredFlags.DelayNone) then
+                if ImGui.BeginTooltip() then
+                    ImGui.Text(guildclickies[_].item)
+                    ImGui.EndTooltip()
+                end
+            end
+            ImGui.TableSetColumnIndex(1)
+            --ImGui.TableHeader("Command")
+            local iter = 0
+            for key,ui in ipairs(ClickableUIButtons) do
+                if iter > 0 then
+                    ImGui.SameLine()
+                end
+
+                iter = iter + 1
+                ImGui.PushStyleColor(ImGuiCol.Button, ClickableUIButtons[key].color)        
+                if ImGui.Button(ui.label) then
+                    if ui.command == 'x' then
+                        mq.cmd('/guildclicky ', zoneButtonLabels[k])
+                    else
+                        mq.cmd(ui.command, '/guildclicky ', zoneButtonLabels[k])
                     end
                 end
-                ImGui.EndTabItem()
+                if ImGui.IsItemHovered(ImGuiHoveredFlags.DelayNone) then
+                    if ImGui.BeginTooltip() then
+                        if ui.command == 'x' then
+                            ImGui.Text("%s %s", '/guildclicky', zoneButtonLabels[k])
+                        else
+                            ImGui.Text("%s %s%s", ui.command, '/guildclicky ', zoneButtonLabels[k])
+                        end
+                        ImGui.EndTooltip()
+                    end
+                end
+                ImGui.PopStyleColor(1)
             end
+            ImGui.PopID()
         end
-        ImGui.EndTabBar()
     end
+    ImGui.EndTable()
 end
 
 local function GuildClickyUI()
