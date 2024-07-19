@@ -176,6 +176,7 @@ local guildclickies = {
     -- [W]
     war = { item = 'Plane of War Spire', text = 'Teleport to The Plane of War' },
     warrens = { item = 'King Gragnar\'s Throne', text = 'Teleport to The Warrens' },
+    westernwastes = { item = 'Trinket of the Far Frozen Wastes', text = 'Teleport to Western Wastes' },
     -- [X]
     xorbb = { item = 'Painting: Throne of Xorbb', text = 'Teleport to Valley of King Xorbb' },
     -- [Y]
