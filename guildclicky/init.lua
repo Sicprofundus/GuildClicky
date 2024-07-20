@@ -206,7 +206,7 @@ local function drawGuildClickyUI()
     searchBuffer = ImGui.InputText("zone name", searchBuffer, bufferSize)
 
     local flags = bit32.bor(ImGuiTableFlags.Borders, ImGuiTableFlags.RowBg)
-    ImGui.BeginTable("buttons", 2, flags)
+    if ImGui.BeginTable("buttons", 2, flags) then
     ImGui.TableSetupColumn("Zone", ImGuiTableColumnFlags.None, 50)
     ImGui.TableSetupColumn("Command", ImGuiTableColumnFlags.None, 50)
     ImGui.TableHeadersRow()
@@ -266,6 +266,7 @@ local function drawGuildClickyUI()
         end
     end
     ImGui.EndTable()
+    end
 end
 
 local function GuildClickyUI()
