@@ -58,10 +58,12 @@ local guildclickies = {
     abysmal = { item = 'The Grozmok Stone', text = 'Teleport to Abysmal Sea' },
     akanon = { item = 'Shelf of Gnomish Spirits', text = 'Teleport to Ak\'Anon' },
     akanon2 = { item = 'Ak\'Anon Bubble Lamp', text = 'Teleport to Ak\'Anon' },
+    ashengate = { item = 'Seal of Ashengate', text = 'Teleport to Ashengate, Reliquary of the Scale' },
     -- [B]
     blackburrow = { item = 'Banner: Blackburrow', text = 'Teleport to Blackburrow' },
     bloodykith = { item = 'Army of Light Barricade', text = 'Teleport to Bloody Kithikor' },
     brells = { item = 'Temple Torchiere', text = 'Teleport to Brell\'s Temple' },
+    broodlands = { item = 'Draconic Shrine of the Brood', text = 'Teleport to The Broodlands' },
     butcherblock = { item = 'Statue of Brell', text = 'Teleport to Butcherblock Mountains' },
     -- [C]
     cabeast = { item = 'Placard: Tink N Babble', text = 'Teleport to East Cabilis' },
@@ -86,7 +88,7 @@ local guildclickies = {
     fury = { item = 'Oceanographer\'s Globe', text = 'Teleport to Hate\'s Fury' },
     -- [G]
     gfaydark = { item = 'Torch of Kelethin', text = 'Teleport to Greater Faydark' },
-    goro = { item = 'Gorowyn Translocator Lantern', text = 'Teleport to Skyfire Mountains' },
+    gorowyn = { item = 'Gorowyn Translocator Lantern', text = 'Teleport to Skyfire Mountains' },
     grimling = { item = 'Painting: Grimling Forest Outpost', text = 'Teleport to Grimling Forest' },
     grobb = { item = 'Sign: Gunthak\'s Beltch', text = 'Teleport to Grobb' },
     grobb2 = { item = 'All-Seeing Skull', text = 'Teleport to Grobb' },
@@ -120,11 +122,13 @@ local guildclickies = {
     lobby = { item = 'Shabby Lobby Door', text = 'Open the Door to the Lobby' },
     -- [M]
     marr = { item = 'Statue of Mithaniel Marr', text = 'Teleport to The Temple of Marr' },
+    mesa = { item = 'Runed Dragon Totem', text = 'Teleport to Goru`kar Mesa' },
     mischief = { item = 'Mischievous Wall Torch', text = 'Teleport to Plane of Mischief' },
     mistmoore = { item = 'Castle of Mistmoore Throne', text = 'Teleport to Castle of Mistmoore' },
     misty = { item = 'Misty Thicket Halfling Bed', text = 'Teleport to Misty Thicket' },
     -- [N]
     nadox = { item = 'Nadox Chandelier', text = 'Teleport to Crypt of Nadox' },
+    necropolis = { item = 'Effigy of the Necropolis', text = 'Teleport to Dragon Necropolis' },
     nedaria = { item = 'Painting: Nedaria\'s Landing', text = 'Teleport to Nedaria\'s Landing' },
     neriak = { item = 'Painting: The Blind Fish', text = 'Teleport to Neriak - Commons' },
     neriakc = { item = 'Painting: Toadstool Tavern', text = 'Teleport to Neriak - Commons' },
@@ -152,6 +156,7 @@ local guildclickies = {
     sharvhal = { item = 'Sculpted Vah Shir Effigy', text = 'Teleport to Shar Vahl' },
     shadowhaven = { item = 'Shadow Haven Teleport Pad', text = 'Teleport to Shadow Haven' },
     shadeweavers = { item = 'Banner of the Vah Shir Crest', text = 'Teleport to Shadeweaver\'s Thicket' },
+    skyshrine = { item = 'Skyshrine Claw Sconce', text = 'Teleport to Skyshrine' },
     sqeynos = { item = 'Painting: Lion\'s Mane Tavern', text = 'Teleport to South Qeynos' },
     stratos = { item = 'Stratos Fire Platform', text = 'Teleport to Stratos' },
     steamfont = { item = 'Steamfont Lava Lamp', text = 'Teleport to Steamfont Mountains' },
@@ -163,6 +168,7 @@ local guildclickies = {
     ssra = { item = 'Ssraeshza Temple Sarcophagus', text = 'Teleport to Ssraeshza Temple' },
     -- [T]
     takishruins = { item = 'Painting: Ruins of Takish-Hiz', text = 'Teleport to Ruins of Takish-Hiz' },
+    templeveeshan = { item = 'Banner of Veeshan', text = 'Teleport to The Temple of Veeshan' },
     thurgadin = { item = 'Dwarven Ice Statue', text = 'Teleport to Thurgadin' },
     tosk = { item = 'Statue of Toskirakk', text = 'Teleport to Toskirakk' },
     toxx = { item = 'Painting: Toxxulia Forest', text = 'Teleport to Toxxulia Forest' },
