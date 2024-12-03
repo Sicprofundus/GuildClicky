@@ -59,6 +59,7 @@ local guildclickies = {
     akanon = { item = 'Shelf of Gnomish Spirits', text = 'Teleport to Ak\'Anon' },
     akanon2 = { item = 'Ak\'Anon Bubble Lamp', text = 'Teleport to Ak\'Anon' },
     ashengate = { item = 'Seal of Ashengate', text = 'Teleport to Ashengate, Reliquary of the Scale' },
+    aureate = { item = 'Aureate Dragon Ring', text = 'Teleport to Aureate Covert' },
     -- [B]
     blackburrow = { item = 'Banner: Blackburrow', text = 'Teleport to Blackburrow' },
     bloodykith = { item = 'Army of Light Barricade', text = 'Teleport to Bloody Kithikor' },
@@ -104,6 +105,7 @@ local guildclickies = {
     halas4 = { item = 'Mounted Tiger Head', text = 'Teleport to Halas' },
     highkeep = { item = 'Painting: High Keep Serpent', text = 'Teleport to High Keep' },
     highkeep2 = { item = 'Banner: The Knotted Serpent', text = 'Teleport to High Keep' },
+    hodstock = { item = 'Aureate Dragon Ring', text = 'Teleport to Hodstock Hills' },
     hole = { item = 'Tattered Cazicite Banner', text = 'Teleport to The Ruins of Old Paineel' },
     hollowshade = { item = 'Hollowshade Moor Bonefire', text = 'Teleport to Hollowshade Moor' },
     -- [I]
