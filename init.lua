@@ -58,6 +58,7 @@ local guildclickies = {
     abysmal = { item = 'The Grozmok Stone', text = 'Teleport to Abysmal Sea' },
     akanon = { item = 'Shelf of Gnomish Spirits', text = 'Teleport to Ak\'Anon' },
     akanon2 = { item = 'Ak\'Anon Bubble Lamp', text = 'Teleport to Ak\'Anon' },
+    arena = { item = 'Ever-Burning Brazier of War', text = 'Teleport to the Arena' },
     ashengate = { item = 'Seal of Ashengate', text = 'Teleport to Ashengate, Reliquary of the Scale' },
     aureate = { item = 'Aureate Dragon Ring', text = 'Teleport to Aureate Covert' },
     -- [B]
@@ -115,7 +116,8 @@ local guildclickies = {
     innovation = { item = 'Innovative Heli-Lamp', text = 'Teleport of Plane of Innovation' },
     -- [J]
     -- [K]
-    kaladim = { item = "Underfoot Monument", text = "Teleport to North Kaladim" },
+    kael = { item = 'Banner of the Frostborn Giants', text = 'Teleport to Kael Drakkel' },
+    kaladim = { item = 'Underfoot Monument', text = 'Teleport to North Kaladim' },
     kithicor = { item = 'Painting: Kithicor Forest', text = 'Teleport to Kithicor Forrest' },
     -- [L]
     laurion = { item = 'Laurion\'s Door', text = 'Teleport to Laurion Inn' },
