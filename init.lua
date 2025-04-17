@@ -358,11 +358,18 @@ end
 
 local function help()
     printMsg('\agGuildClicky available options include:')
-
-    for k,_ in pairs(guildclickies) do
-        if validateportal(_.item) then
-            printMsg('\ao\"/gc %s\" \arto use \ag%s \arto \ao%s', k, _.item, _.text)
+    local keys = {}
+    for k in pairs(guildclickies) do
+        if validateportal(k) then
+            table.insert(keys, k)
         end
+    end
+
+    table.sort(keys)
+
+    for _, key in ipairs(keys) do
+        local v = guildclickies[key]
+        printMsg('\ao\"/gc %s\" \arto use \ag%s \arto \ao%s', key, v.item, v.text)
     end
 end
 
