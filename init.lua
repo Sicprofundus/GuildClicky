@@ -78,6 +78,7 @@ local guildclickies = {
     dulak = { item = 'Painting: Dulak\'s Harbor', text = 'Teleport to Dulak\'s Harbor' },
     -- [E]
     eldar = { item = 'Painting: Elddar Forest', text = 'Teleport to The Elddar Forest' },
+    epicenter = { item = 'Trinket of the Center', text = 'Teleport to Heart of Fear: The Epicenter' },
     erudin = { item = 'Erudin Brazier', text = 'Teleport to Erudin' },
     everfrost = { item = 'Claw Sconce Torch', text = 'Teleport to Everfrost' },
     -- [F]
