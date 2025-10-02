@@ -361,7 +361,9 @@ local function help()
     printMsg('\agGuildClicky available options include:')
     local keys = {}
     for k in pairs(guildclickies) do
-        if validateportal(k) then
+        local v = guildclickies[k]
+        -- we need to check the .item here otherwise we won't report items that do more than 1 location.
+        if validateportal(v.item) then
             table.insert(keys, k)
         end
     end
