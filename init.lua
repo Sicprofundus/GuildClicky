@@ -16,6 +16,10 @@ local ground = mq.TLO.Ground
 local guildclickymsg = '\ao[\agGuildClicky\ao]\ag::\aw '
 local guildclickyhelp = 'Please \ay\"/guildclicky \ag(or /gc)\ay help\"\aw for a list of available clickable guild portals.'
 
+local function printMsg(...)
+    print(guildclickymsg .. string.format(...))
+end
+
 local bValidateComplete = false
 
 -- GUI Control variables
@@ -197,6 +201,7 @@ local guildclickies = {
 }
 
 local zoneButtonLabels = {}
+local missingPortalClickies = {}
 local searchBuffer = ""
 
 local function validateportal(item)
@@ -207,15 +212,36 @@ local function sortvalidatedportals()
     for k,_ in pairs(guildclickies) do
         if validateportal(_.item) then
             table.insert(zoneButtonLabels, k)
+        else
+            table.insert(missingPortalClickies, k)
         end
     end
     table.sort(zoneButtonLabels)
     bValidateComplete = true
 end
 
+local function ReportMissingPortals()
+    printMsg('\agGuildClicky potentially missing portals:')
+    table.sort(missingPortalClickies)
+
+    for _, key in ipairs(missingPortalClickies) do
+        local v = guildclickies[key]
+        printMsg('\arMissing:\ag%s \arto \ao%s', v.item, v.text)
+    end
+end
+
 local function drawGuildClickyUI()
+    -- only display the missing portal clickies if we have some in the missing table
+    -- utilizing local next = next is "maximum efficiency"
+    -- https://stackoverflow.com/questions/1252539/most-efficient-way-to-determine-if-a-lua-table-is-empty-contains-no-entries
+    local next = next
+    if next(missingPortalClickies) ~= nil then
+        if ImGui.Button('Report Missing Clickies') then
+            ReportMissingPortals()
+        end
+    end
     local bufferSize = 64
-    searchBuffer = ImGui.InputText("zone name", searchBuffer, bufferSize)
+    searchBuffer = ImGui.InputTextWithHint("", "zone name", searchBuffer, bufferSize)
 
     local flags = bit32.bor(ImGuiTableFlags.Borders, ImGuiTableFlags.RowBg)
     if ImGui.BeginTable("buttons", 2, flags) then
@@ -294,10 +320,6 @@ local function GuildClickyUI()
 end
 
 mq.imgui.init('GuildClickyUI', GuildClickyUI)
-
-local function printMsg(...)
-    print(guildclickymsg .. string.format(...))
-end
 
 local function validatepath(item)
     return mq.TLO.Navigation.PathExists(string.format("item %s", item))()
@@ -385,6 +407,11 @@ local function bind_guildclicky(cmd)
 
     if cmd == 'ui' or cmd == 'gui' or cmd == 'show' then
         bDisplayUI = not bDisplayUI
+        return
+    end
+
+    if cmd == 'missing' then
+        ReportMissingPortals()
         return
     end
 
