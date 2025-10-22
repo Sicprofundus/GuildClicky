@@ -101,6 +101,7 @@ local guildclickies = {
     gunthak = { item = 'Gunthak Altar', text = 'Teleport to the Gulf of Gunthak' },
     -- [H]
     health = { item = 'Cynosure of Health', text = 'Teleport to the Plane of Health' },
+    health2 = { item = 'Throne of the Prime Healer', text = 'Teleport to Plane of Health' },
     halas = { item = 'Placard: Halas', text = 'Teleport to Halas' },
     halas2 = { item = 'Mounted Snake Head', text = 'Teleport to Halas' },
     halas3 = { item = 'Mounted Bear Head', text = 'Teleport to Halas' },
