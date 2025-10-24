@@ -61,7 +61,7 @@ local guildclickies = {
     -- [A]
     abysmal = { item = 'The Grozmok Stone', text = 'Teleport to Abysmal Sea' },
     akanon = { item = 'Shelf of Gnomish Spirits', text = 'Teleport to Ak\'Anon' },
-    akanon2 = { item = 'Ak\'Anon Bubble Lamp', text = 'Teleport to Ak\'Anon' },
+    akanon2 = { item = 'Ak`Anon Bubble Lamp', text = 'Teleport to Ak\'Anon' },
     arena = { item = 'Ever-Burning Brazier of War', text = 'Teleport to the Arena' },
     ashengate = { item = 'Seal of Ashengate', text = 'Teleport to Ashengate, Reliquary of the Scale' },
     aureate = { item = 'Aureate Dragon Ring', text = 'Teleport to Aureate Covert' },
@@ -114,7 +114,7 @@ local guildclickies = {
     highkeep2 = { item = 'Banner: The Knotted Serpent', text = 'Teleport to High Keep' },
     hodstock = { item = 'Aureate Dragon Ring', text = 'Teleport to Hodstock Hills' },
     hole = { item = 'Tattered Cazicite Banner', text = 'Teleport to The Ruins of Old Paineel' },
-    hollowshade = { item = 'Hollowshade Moor Bonefire', text = 'Teleport to Hollowshade Moor' },
+    hollowshade = { item = 'Hollowshade Moor Bonfire', text = 'Teleport to Hollowshade Moor' },
     -- [I]
     iceclad = { item = 'Banner: Gnome Pirates', text = 'Teleport to Iceclad Ocean' },
     icewell = { item = 'Dain\'s Throne Replica', text = 'Teleport to Icewell Keep' },
