@@ -162,6 +162,7 @@ local guildclickies = {
     -- [S]
     sanctus = { item = 'Statue: Sanctus Seru', text = 'Teleport to Sanctus Seru' },
     sanctus2 = { item = 'Banner: Sanctus Seru', text = 'Teleport to Sanctus Seru' },
+    scarredgrove = { item = 'Mithaniel Marr\'s Strategy Table', text = 'Teleport to Scarred Grove' },
     seb = { item = 'Froglok Head in a Jar', text = 'Teleport to Old Sebilis' },
     sharvhal = { item = 'Sculpted Vah Shir Effigy', text = 'Teleport to Shar Vahl' },
     shadowhaven = { item = 'Shadow Haven Teleport Pad', text = 'Teleport to Shadow Haven' },
