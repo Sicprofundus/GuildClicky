@@ -119,7 +119,7 @@ local guildclickies = {
     iceclad = { item = 'Banner: Gnome Pirates', text = 'Teleport to Iceclad Ocean' },
     icewell = { item = 'Dain\'s Throne Replica', text = 'Teleport to Icewell Keep' },
     innothule = { item = 'Guktan Brazier', text = 'Teleport to Innothule Swamp' },
-    innovation = { item = 'Innovative Heli-Lamp', text = 'Teleport of Plane of Innovation' },
+    innovation = { item = 'Innovative Heli-Lamp', text = 'Teleport to Plane of Innovation' },
     -- [J]
     -- [K]
     kael = { item = 'Banner of the Frostborn Giants', text = 'Teleport to Kael Drakkel' },
