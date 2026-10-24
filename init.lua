@@ -143,6 +143,7 @@ local guildclickies = {
     neriak = { item = 'Painting: The Blind Fish', text = 'Teleport to Neriak - Commons' },
     neriakc = { item = 'Painting: Toadstool Tavern', text = 'Teleport to Neriak - Commons' },
     neriak3rd = { item = 'Painting: Maiden\'s Fancy', text = 'Teleport to Neriak - Third Gate' },
+    neriak4th = { item = 'Brazier of Eternal Malice', text = 'Teleport to Neriak - Fourth Gate' },
     neriakfq = { item = 'Painting: Slugs Tavern', text = 'Teleport to Neriak - Foreign Quarter' },
     nqeynos = { item = 'Coat of Arms: Qeynos', text = 'Teleport to North Qeynos' },
     nqeynos2 = { item = 'Painting: Crow\'s Pub & Casino', text = 'Teleport to North Qeynos' },
@@ -154,6 +155,7 @@ local guildclickies = {
     paineel = { item = 'Bookshelf of Paineel', text = 'Teleport to Paineel' },
     permafrost = { item = 'Frozen Barbarian Adventurer', text = 'Teleport to Permafrost' },
     permafrost2 = { item = 'Frozen Barbarian Adventuress', text = 'Teleport to Permafrost' },
+    pohate = { item = 'Crimson Standard of Hate', text = 'Teleport: The Plane of Hate' },
     -- [Q]
     -- [R]
     rathe = { item = 'Rathe Mountain Cart', text = 'Teleport to The Rathe Mountains' },
@@ -185,6 +187,7 @@ local guildclickies = {
     toxx = { item = 'Painting: Toxxulia Forest', text = 'Teleport to Toxxulia Forest' },
     trak = { item = 'Emperor Ganak Throne', text = 'Teleport to Trakanon\'s Teeth' },
     trak2 = { item = 'Statue: Iksar Bust', text = 'Teleport to Trakanon\'s Teeth' },
+    tranquility = { item = 'Placid Pillow Tuffet', text = 'Teleport: The Plane of Tranquility' },
     -- [U]
     umbral =  { item = 'Umbral Plains Scrying Bowl', text = 'Teleport to Umbral Plains' },
     -- [V]    
