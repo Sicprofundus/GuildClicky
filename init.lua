@@ -81,7 +81,7 @@ local guildclickies = {
     drunder = { item = 'Painting: Drunder, the Fortress of Zek', text = 'Teleport to Drunder, Fortress of Zek' },
     dulak = { item = 'Painting: Dulak\'s Harbor', text = 'Teleport to Dulak\'s Harbor' },
     -- [E]
-    eldar = { item = 'Painting: Elddar Forest', text = 'Teleport to The Elddar Forest' },
+    elddar = { item = 'Painting: Elddar Forest', text = 'Teleport to The Elddar Forest' },
     epicenter = { item = 'Trinket of the Center', text = 'Teleport to Heart of Fear: The Epicenter' },
     erudin = { item = 'Erudin Brazier', text = 'Teleport to Erudin' },
     everfrost = { item = 'Claw Sconce Torch', text = 'Teleport to Everfrost' },
@@ -136,6 +136,7 @@ local guildclickies = {
     mischief = { item = 'Mischievous Wall Torch', text = 'Teleport to Plane of Mischief' },
     mistmoore = { item = 'Castle of Mistmoore Throne', text = 'Teleport to Castle of Mistmoore' },
     misty = { item = 'Misty Thicket Halfling Bed', text = 'Teleport to Misty Thicket' },
+    morells = { item = 'Beacon of Vivid Dreams', text = 'Teleport: Morell\'s Castle' },
     -- [N]
     nadox = { item = 'Nadox Chandelier', text = 'Teleport to Crypt of Nadox' },
     necropolis = { item = 'Effigy of the Necropolis', text = 'Teleport to Dragon Necropolis' },
@@ -213,8 +214,11 @@ local function validateportal(item)
 end
 
 local function sortvalidatedportals()
-    for k,_ in pairs(guildclickies) do
-        if validateportal(_.item) then
+    -- we need to clear out these lits otherwise we'll add duplicates if we go in another guildhall
+    zoneButtonLabels = {}
+    missingPortalClickies = {}
+    for k, v in pairs(guildclickies) do
+        if validateportal(v.item) then
             table.insert(zoneButtonLabels, k)
         else
             table.insert(missingPortalClickies, k)
@@ -245,22 +249,17 @@ local function drawGuildClickyUI()
         end
     end
     local bufferSize = 64
-    searchBuffer = ImGui.InputTextWithHint("", "zone name", searchBuffer, bufferSize)
+    searchBuffer = ImGui.InputTextWithHint("##search", "zone name", searchBuffer, bufferSize)
 
     local flags = bit32.bor(ImGuiTableFlags.Borders, ImGuiTableFlags.RowBg)
     if ImGui.BeginTable("buttons", 2, flags) then
     ImGui.TableSetupColumn("Zone", ImGuiTableColumnFlags.None, 50)
     ImGui.TableSetupColumn("Command", ImGuiTableColumnFlags.None, 50)
     ImGui.TableHeadersRow()
-    for k,_ in ipairs(zoneButtonLabels) do
-        local text = zoneButtonLabels[k]
+    for k, name in ipairs(zoneButtonLabels) do
         local bdisplaybutton = false
 
-        if string.len(searchBuffer) > 0 or string.len(searchBuffer) then
-            if string.find(zoneButtonLabels[k]:lower(), searchBuffer:lower()) then
-                bdisplaybutton = true
-            end
-        else
+        if string.find(name:lower(), searchBuffer:lower(), 1, true) then
             bdisplaybutton = true
         end
 
@@ -268,36 +267,36 @@ local function drawGuildClickyUI()
             ImGui.PushID(k)
             ImGui.TableNextRow()
             ImGui.TableSetColumnIndex(0)
-            ImGui.Text(text)
+            ImGui.Text(name)
             if ImGui.IsItemHovered(ImGuiHoveredFlags.DelayNone) then
                 if ImGui.BeginTooltip() then
-                    ImGui.Text(guildclickies[_].item)
+                    ImGui.Text(guildclickies[name].item)
                     ImGui.EndTooltip()
                 end
             end
             ImGui.TableSetColumnIndex(1)
             --ImGui.TableHeader("Command")
             local iter = 0
-            for key,ui in ipairs(ClickableUIButtons) do
+            for _, ui in ipairs(ClickableUIButtons) do
                 if iter > 0 then
                     ImGui.SameLine()
                 end
 
                 iter = iter + 1
-                ImGui.PushStyleColor(ImGuiCol.Button, ClickableUIButtons[key].color)        
+                ImGui.PushStyleColor(ImGuiCol.Button, ui.color)        
                 if ImGui.Button(ui.label) then
                     if ui.command == 'x' then
-                        mq.cmd('/guildclicky ', zoneButtonLabels[k])
+                        mq.cmd('/guildclicky ', name)
                     else
-                        mq.cmd(ui.command, '/guildclicky ', zoneButtonLabels[k])
+                        mq.cmd(ui.command, '/guildclicky ', name)
                     end
                 end
                 if ImGui.IsItemHovered(ImGuiHoveredFlags.DelayNone) then
                     if ImGui.BeginTooltip() then
                         if ui.command == 'x' then
-                            ImGui.Text("%s %s", '/guildclicky', zoneButtonLabels[k])
+                            ImGui.Text("%s %s", '/guildclicky', name)
                         else
-                            ImGui.Text("%s %s%s", ui.command, '/guildclicky ', zoneButtonLabels[k])
+                            ImGui.Text("%s %s%s", ui.command, '/guildclicky ', name)
                         end
                         ImGui.EndTooltip()
                     end
@@ -316,8 +315,11 @@ local function GuildClickyUI()
         ImGui.PushStyleVar(ImGuiStyleVar.WindowRounding, 10)
         ImGui.PushStyleVar(ImGuiStyleVar.ScrollbarRounding, 50)
         ImGui.PushStyleVar(ImGuiStyleVar.FrameRounding, 5)
-        bDisplayUI, _ = ImGui.Begin('GuildClicky', true)
-        drawGuildClickyUI()
+        local open, show = ImGui.Begin('GuildClicky', true)
+        bDisplayUI = open
+        if show then
+            drawGuildClickyUI()
+        end
         ImGui.PopStyleVar(3)
         ImGui.End()
     end
@@ -381,6 +383,8 @@ local function do_guildportal(clicky)
     if mq.TLO.ItemTarget() == clicky.item then
         callnav()
         interactmenu(clicky)
+    else
+        printMsg('Could not target %s', clicky.item)
     end
 end
 
@@ -447,12 +451,18 @@ end
 local function main()
     while true do
         if insideguildhall() and not bValidateComplete then
+            mq.delay(3000)
             sortvalidatedportals()
         end
 
         if bDisplayUI and not insideguildhall() then
             bDisplayUI = false
         end
+
+        if not insideguildhall() and bValidateComplete then
+            bValidateComplete = false
+        end
+
         mq.delay(500)
     end
 end
